@@ -29,13 +29,13 @@ USERS = {
     "Mal": "MMM"
 }
 
-# Configure Gemini API
-API_KEY = st.secrets["GEMINI_API_KEY"] if "GEMINI_API_KEY" in st.secrets else None
+# Configure Gemini API using environment variables (for Heroku)
+API_KEY = os.getenv("GEMINI_API_KEY", None)
 
 # Function to configure Gemini
 def configure_gemini():
     if not API_KEY:
-        st.error("Please set your Gemini API key in Streamlit secrets.")
+        st.error("Please set your Gemini API key in Heroku config vars.")
         return False
     
     try:
